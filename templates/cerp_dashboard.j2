@@ -1,0 +1,10 @@
+[
+    {% for config in configs %}
+    {
+        "username": "{{ config.username }}",
+        "password": "{{ config.password }}",
+        "url": "{{ config.url }}",
+        "interval_seconds": {{ config.interval_seconds }}
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+]
