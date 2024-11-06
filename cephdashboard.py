@@ -12,7 +12,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 def render_jinja2_template(configs):
     env = Environment(loader=FileSystemLoader(searchpath='./templates'))
-    template = env.get_template('cerp_dashboard.j2')
+    template = env.get_template('ceph_dashboard.j2')
     return json.loads(template.render(configs=configs))
 
 
@@ -114,7 +114,7 @@ def authenticate(username, password, url):
     return response.json().get("token")
 
 
-class CerpDashboardService:
+class CephDashboardService:
     def __init__(self):
         self.last_health_status_hash = None
         self.token = None
@@ -176,7 +176,7 @@ def main():
 
     rendered_configs = render_jinja2_template(configs)
 
-    dashboard_service = CerpDashboardService()
+    dashboard_service = CephDashboardService()
     dashboard_service.schedule_health_diff_check(rendered_configs)
 
 if __name__ == "__main__":
